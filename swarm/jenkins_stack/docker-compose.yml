@@ -15,11 +15,12 @@ services:
       - /home/ben/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
+      - /lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
     networks:
       - jenkins-cluster
 
   jenkins-agent:
-    image: tview/jenkins-swarm-agent:1.0.4
+    image: tview/jenkins-swarm-agent:1.0.5
     command:
       - '-master'
       - 'http://jenkins:8080'
@@ -31,6 +32,7 @@ services:
       - /tmp:/tmp
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
+      - /lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
     depends_on:
       - jenkins
     networks:
